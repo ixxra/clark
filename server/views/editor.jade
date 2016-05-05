@@ -1,0 +1,43 @@
+extends layout
+
+block stylesheets
+  link(rel="stylesheet", href="/stylesheets/simplemde.min.css")
+
+block preJavascripts
+  script(type="text/javascript", src="/javascripts/modernizr.js")
+
+block content
+  h1= title
+
+  div
+    ul.button-group
+      li
+        a.button(href="#", data-reveal-id="help-message") Editor help
+      li
+        input#uploader(type="file", text="Add image") 
+      li
+        button themes
+
+  
+  textarea
+  
+  div(data-reveal, aria-labelled-by="editorHelp", aria-hidden="true", role="dialog")#help-message.reveal-modal
+    h3#editorHelp Default shortcuts
+    each s in shortcuts
+      div.row
+        div.small-6.columns 
+          blokquote #{s.key}:
+        div.small-6.columns #{s.val}
+    
+    a.close-reveal-modal(aria-label="Close")&#215;
+    
+block postJavascripts  
+  script(type="text/javascript", src="/javascripts/upload.js")
+  script(type="text/javascript", src="/javascripts/jquery.js")
+  script(type="text/javascript", src="/javascripts/fastclick.js")
+  script(type="text/javascript", src="/javascripts/foundation.min.js")
+  script(type="text/javascript", src="/javascripts/simplemde.min.js")
+  script.
+    var simplemde = new SimpleMDE({  
+    });
+    $(document).foundation();
